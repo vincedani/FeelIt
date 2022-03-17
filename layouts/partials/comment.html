@@ -20,9 +20,7 @@
         {{- $vssue := $comment.vssue | default dict -}}
         {{- $vssueSecret := getenv "HUGO_VSSUE_CLIENTSECRET" | default $vssue.clientSecret -}}
         {{- if $vssue.enable -}}
-        {{- if not $vssueSecret -}}
-            {{- erroridf "err-missing-comment-accesstoken" "comment system: Missing config value for .params.page.comment.vssue.clientSecret. This can be set in config.toml, but it is recommended to configure this via the HUGO_VSSUE_CLIENTSECRET OS environment variable." -}}
-        {{- else -}}
+        {{- if $vssueSecret -}}
             <div id="vssue"></div>
             {{- $source := $cdn.vssueCSS | default "lib/vue/vssue/vssue.css" -}}
             {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
@@ -58,9 +56,7 @@
         {{- $gitalk := $comment.gitalk | default dict -}}
         {{- $gitalkSecret := getenv "HUGO_GITALK_CLIENTSECRET" | default $gitalk.clientSecret -}}
         {{- if $gitalk.enable -}}
-        {{- if not $gitalkSecret -}}
-            {{- erroridf "err-missing-comment-accesstoken" "comment system: Missing config value for .params.page.comment.gitalk.clientSecret. This can be set in config.toml, but it is recommended to configure this via the HUGO_GITALK_CLIENTSECRET OS environment variable." -}}
-        {{- else -}}
+        {{- if $gitalkSecret -}}
             <div id="gitalk"></div>
             {{- $source := $cdn.gitalkCSS | default "lib/gitalk/gitalk.css" -}}
             {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
@@ -77,9 +73,7 @@
         {{- $valine := $comment.valine | default dict -}}
         {{- $valineSecret := getenv "HUGO_VALINE_CLIENTSECRET" | default $valine.appKey -}}
         {{- if $valine.enable -}}
-        {{- if not $valineSecret -}}
-            {{- erroridf "err-missing-comment-accesstoken" "comment system: Missing config value for .params.page.comment.valine.appKey. This can be set in config.toml, but it is recommended to configure this via the HUGO_VALINE_CLIENTSECRET OS environment variable." -}}
-        {{- else -}}
+        {{- if $valineSecret -}}
             <div id="valine"></div>
             {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
             {{- dict "Source" "lib/valine/valine.scss" "ToCSS" $options | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
